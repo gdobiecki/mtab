@@ -10,10 +10,10 @@ class PopUpWindow extends Page {
     }
 
     closePopUp() {
-        this.moveForwardButton.waitForDisplayed(5000);
-        return this.moveForwardButton.click();
+        if (this.moveForwardButton.isDisplayed()) {
+            return this.moveForwardButton.click();
+        }
     }
-
 
 }
 
