@@ -4,6 +4,7 @@ import resultPage from '../pageobjects/result-page';
 import utils from '../utils/utils';
 
 let assert = require('chai').assert;
+let expect = require('chai').expect;
 
 describe('allegro test suite', function () {
     beforeEach(function () {
@@ -27,7 +28,18 @@ describe('allegro test suite', function () {
         assert.isTrue(priceInPennies > numberOfReturnedItems, "Price in pennies should be greater than number of offers");
     });
 
-    it('test #2', function () {
+    it('sorting by price descending', function () {
+        resultPage.sortBy(" cena: od najwyższej ");
+        assert.isTrue(browser.getUrl().includes('order=pd'));
+        browser.pause(2000); //let's wait for page to reload
+        let prices = resultPage.getFirstFivePromotedBikePrices();
+
+        //We sort array of prices (in descending order) to make sure it's equal to prices we read from allegro page
+        prices.sort((a, b) => b - a);
+        expect(prices).to.eql(resultPage.getFirstFivePromotedBikePrices());
+    });
+
+    it('test #3', function () {
         let firstBikePrice = resultPage.getFirstBikePrice();
         firstBikePrice = utils.convertPriceDisplayedInAllegro(firstBikePrice);
 
