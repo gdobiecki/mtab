@@ -41,6 +41,14 @@ class ResultPage {
         return $("div.opbox-listing-sort div > div > select");
     }
 
+    get subCategory() {
+        return $("#opbox-category-tree div:nth-child(2) > ul > li > span a");
+    }
+
+    get selectedSortingMethod() {
+        return $("div.opbox-listing-sort > div > div > select > option:nth-child(1)");
+    }
+
     getNumberOfItemsReturned() {
         return this.resultCounter.getText();
     }
@@ -89,6 +97,14 @@ class ResultPage {
         let seventhBike = parseFloat(utils.convertPriceDisplayedInAllegro(this.seventhBikePrice.getText()));
 
         return [thirdBike, fourthBike, fifthBike, sixthBike, seventhBike];
+    }
+
+    getSubCategory() {
+        return this.subCategory.getText();
+    }
+
+    getSortingMethod() {
+        return this.selectedSortingMethod.getText().trim();
     }
 
 }

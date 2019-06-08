@@ -3,8 +3,8 @@ import popupWindow from '../pageobjects/popup-window';
 import resultPage from '../pageobjects/result-page';
 import utils from '../utils/utils';
 
-let assert = require('chai').assert;
-let expect = require('chai').expect;
+const assert = require('chai').assert;
+const expect = require('chai').expect;
 
 describe('allegro test suite', function () {
     beforeEach(function () {
@@ -16,7 +16,15 @@ describe('allegro test suite', function () {
         landingPage.clickSearchButton();
     });
 
-    it('test #1', function () {
+    it('should be in a proper subcategory', function () {
+        let expectedSubCategory = 'Rowery';
+        let expectedSelectedSortingMethod = 'trafność: największa';
+        expect(expectedSubCategory).to.equal(resultPage.getSubCategory());
+        expect(expectedSelectedSortingMethod).to.equal(resultPage.getSortingMethod());
+        assert.isTrue(browser.getTitle().includes('Rower'));
+    });
+
+    it('check first bike\'s price and get the number of offers', function () {
         let firstBikePrice = resultPage.getFirstBikePrice();
         console.log("First bike's price: " + firstBikePrice);
         firstBikePrice = utils.convertPriceDisplayedInAllegro(firstBikePrice);
@@ -28,7 +36,7 @@ describe('allegro test suite', function () {
         assert.isTrue(priceInPennies > numberOfReturnedItems, "Price in pennies should be greater than number of offers");
     });
 
-    it('sorting by price descending', function () {
+    it('sort by price descending', function () {
         resultPage.sortBy(" cena: od najwyższej ");
         assert.isTrue(browser.getUrl().includes('order=pd'));
         browser.pause(2000); //let's wait for page to reload
@@ -39,7 +47,7 @@ describe('allegro test suite', function () {
         expect(prices).to.eql(resultPage.getFirstFivePromotedBikePrices());
     });
 
-    it('test #3', function () {
+    it('first five bike prices added, compute difference between most expensive and cheapest bike', function () {
         let firstBikePrice = resultPage.getFirstBikePrice();
         firstBikePrice = utils.convertPriceDisplayedInAllegro(firstBikePrice);
 
@@ -57,7 +65,7 @@ describe('allegro test suite', function () {
         if (firstBikePrice >= 500 && firstBikePrice <= 721) {
             process.exit(1);
         }
-    })
+    });
 });
 
 
