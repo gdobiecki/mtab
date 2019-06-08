@@ -26,21 +26,14 @@ class ResultPage {
     }
 
     getNumberOfItemsReturned() {
-        this.resultCounter.waitForDisplayed(5000);
         return this.resultCounter.getText();
     }
 
     getFirstBikePrice() {
-        this.firstBikePrice.waitForDisplayed(5000);
         return this.firstBikePrice.getText();
     }
 
     addFirstFiveBikesPrices() {
-        this.firstBikePrice.waitForDisplayed(5000);
-        this.secondBikePrice.waitForDisplayed(5000);
-        this.thirdBikePrice.waitForDisplayed(5000);
-        this.fourthBikePrice.waitForDisplayed(5000);
-        this.fifthBikePrice.waitForDisplayed(5000);
         let firstBike = parseFloat(utils.convertPriceDisplayedInAllegro(this.firstBikePrice.getText()));
         let secondBike = parseFloat(utils.convertPriceDisplayedInAllegro(this.secondBikePrice.getText()));
         let thirdBike = parseFloat(utils.convertPriceDisplayedInAllegro(this.thirdBikePrice.getText()));

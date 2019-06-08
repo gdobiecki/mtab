@@ -17,12 +17,10 @@ class LandingPage extends Page {
     }
 
     searchForItem(item) {
-        this.searchInput.waitForDisplayed(5000);
         return this.searchInput.setValue(item);
     }
 
     clickSearchButton() {
-        this.searchButton.waitForDisplayed(5000);
         this.searchButton.click();
     }
 }
